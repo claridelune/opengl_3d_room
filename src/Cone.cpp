@@ -14,3 +14,14 @@ void Cone::draw() const
 
 	glPopMatrix();
 }
+
+
+void Cone::update()
+{
+	transform.rotation.y += 0.2f;
+
+	if (transform.rotation.y >= 360.0f)
+	{
+		transform.rotation.y = 0.0f;
+	}
+}

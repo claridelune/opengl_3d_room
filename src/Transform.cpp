@@ -11,5 +11,5 @@ void Transform::apply() const
 	glRotatef(rotation.y, 0, 1, 0);
 	glRotatef(rotation.z, 0, 0, 1);
 
-	glTranslatef(scale.x, scale.y, scale.z);
+	glScalef(scale.x, scale.y, scale.z);
 }

@@ -13,6 +13,7 @@ bool OBJModel::load(const std::string &filename)
 	faces.clear();
 
 	std::string line;
+
 	while (std::getline(file, line))
 	{
 		std::stringstream ss(line);
@@ -27,13 +28,22 @@ bool OBJModel::load(const std::string &filename)
 		}
 		else if (type == "f")
 		{
-			Face f;
-			ss >> f.a >> f.b >> f.c;
-			--f.a; --f.b; --f.c;
-			faces.push_back(f);
+			std::vector<int> v;
+			int i;
+
+			while (ss >> i)
+				v.push_back(i - 1);
+
+			for (int n = 1; n < v.size() - 1; n++)
+			{
+				Face f;
+				f.a = v[0];
+				f.b = v[n];
+				f.c = v[n + 1];
+				faces.push_back(f);
+			}
 		}
 	}
-
 	return true;
 }
 

@@ -14,11 +14,12 @@ bool Application::initialize(int argc, char **argv)
 	glutCreateWindow("3D Room");
 
 	glEnable(GL_DEPTH_TEST);
-	glClearColor(0.08f, 0.08f, 0.10f, 1.0f);
+	glClearColor(1.00f, 1.00f, 1.0f, 1.0f);
 
 	glutDisplayFunc(displayCallback);
 	glutReshapeFunc(reshapeCallback);
 	glutKeyboardFunc(keyboardCallback);
+	glutTimerFunc(16, timerCallback, 0);
 
 	return true;
 }
@@ -68,6 +69,14 @@ void Application::keyboard(unsigned char key)
 	glutPostRedisplay();
 }
 
+void Application::timer()
+{
+	scene.update();
+	
+	glutPostRedisplay();
+	glutTimerFunc(16, timerCallback, 0);
+}
+
 void Application::displayCallback()
 {
 	instance->display();
@@ -81,4 +90,9 @@ void Application::reshapeCallback(int width, int height)
 void Application::keyboardCallback(unsigned char key, int, int)
 {
 	instance->keyboard(key);
+}
+
+void Application::timerCallback(int)
+{
+	instance->timer();
 }

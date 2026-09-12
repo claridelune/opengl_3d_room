@@ -9,6 +9,7 @@ class Cone
 		Transform transform;
 
 		void draw() const;
+		void update();
 };
 
 #endif

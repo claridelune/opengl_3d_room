@@ -16,6 +16,9 @@ add_executable(main
 	src/OBJModel.cpp
 	src/Transform.cpp
 	src/Chair.cpp
+	src/Blinds.cpp
+	src/Bed.cpp
+	src/Desk.cpp
 )
 
 target_include_directories(main PRIVATE include)

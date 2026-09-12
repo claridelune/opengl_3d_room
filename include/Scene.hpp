@@ -3,13 +3,18 @@
 
 #include "Cone.hpp"
 #include "Chair.hpp"
+#include "Blinds.hpp"
+#include "Bed.hpp"
+#include "Desk.hpp"
 
 class Scene
 {
 	private:
 		Cone cone;
 		Chair chair;
-		OBJModel model;
+		Blinds blinds;
+		Desk desk;
+		Bed bed;
 		// Variables de animación
 		float minuteAngle;
 		float lampAngle;
