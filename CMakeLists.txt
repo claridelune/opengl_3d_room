@@ -14,6 +14,8 @@ add_executable(main
 	src/Scene.cpp
 	src/Cone.cpp
 	src/OBJModel.cpp
+	src/Transform.cpp
+	src/Chair.cpp
 )
 
 target_include_directories(main PRIVATE include)

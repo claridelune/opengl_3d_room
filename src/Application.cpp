@@ -11,7 +11,7 @@ bool Application::initialize(int argc, char **argv)
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowSize(900, 600);
-	glutCreateWindow("OpenGL Template");
+	glutCreateWindow("3D Room");
 
 	glEnable(GL_DEPTH_TEST);
 	glClearColor(0.08f, 0.08f, 0.10f, 1.0f);
