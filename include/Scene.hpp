@@ -6,6 +6,10 @@
 #include "Blinds.hpp"
 #include "Bed.hpp"
 #include "Desk.hpp"
+#include "Dresser.hpp"
+#include "Lamp.hpp"
+#include "Shelf.hpp"
+#include "Clock.hpp"
 
 class Scene
 {
@@ -15,6 +19,10 @@ class Scene
 		Blinds blinds;
 		Desk desk;
 		Bed bed;
+		Dresser dresser;
+		Lamp lamp;
+		Shelf shelf;
+		Clock clock;
 		// Variables de animación
 		float minuteAngle;
 		float lampAngle;
@@ -26,13 +34,15 @@ class Scene
 		Scene();
 		void draw() const;
 		void update();
+		void rotateLamp();
+		void toggleShelfWireframe();
 
 		// Objetos JesusP
 		void drawComoda() const;
 		void drawLampara() const;
 		void drawEstante() const;
 		void drawReloj() const;
-
+		
 };
 
 #endif
