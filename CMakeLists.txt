@@ -19,6 +19,10 @@ add_executable(main
 	src/Blinds.cpp
 	src/Bed.cpp
 	src/Desk.cpp
+	src/Dresser.cpp
+	src/Lamp.cpp
+	src/Shelf.cpp
+	src/Clock.cpp
 )
 
 target_include_directories(main PRIVATE include)
