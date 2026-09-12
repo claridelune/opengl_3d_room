@@ -63,8 +63,24 @@ void Application::keyboard(unsigned char key)
 
 	if (key == 'r')
 		camera.reset();
-	else
-		camera.move(key);
+
+	// L: rotar parte superior de la lampara
+    else if (key == 'l' || key == 'L')
+    {
+        scene.rotateLamp();
+    }
+
+    // V: activar / desactivar wireframe del estante
+    else if (key == 'v' || key == 'V')
+    {
+        scene.toggleShelfWireframe();
+    }
+
+    // Movimiento de camara existente
+    else
+    {
+        camera.move(key);
+    }
 
 	glutPostRedisplay();
 }
