@@ -12,7 +12,6 @@ add_executable(main
 	src/Application.cpp
 	src/Camera.cpp
 	src/Scene.cpp
-	src/Cone.cpp
 	src/OBJModel.cpp
 	src/Transform.cpp
 	src/Chair.cpp
@@ -23,6 +22,8 @@ add_executable(main
 	src/Lamp.cpp
 	src/Shelf.cpp
 	src/Clock.cpp
+	src/Apple.cpp
+	src/Room.cpp
 )
 
 target_include_directories(main PRIVATE include)
