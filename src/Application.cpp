@@ -66,7 +66,7 @@ void Application::keyboard(unsigned char key)
 	if (key == 'r')
 		camera.reset();
 
-    else if (key == 'c' || key == 'c')
+    else if (key == 'c' || key == 'C')
     {
         scene.rotateLamp();
     }
