@@ -17,6 +17,9 @@ class Application
 		void keyboard(unsigned char key);
 		void timer();
 
+		void drawText(int x, int y, const char *text);
+		void drawHelp();
+
 		static void displayCallback();
 		static void reshapeCallback(int width, int height);
 		static void keyboardCallback(unsigned char key, int x, int y);

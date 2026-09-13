@@ -39,6 +39,8 @@ void Application::display()
 	camera.apply();
 	scene.draw();
 
+	drawHelp();
+
 	glutSwapBuffers();
 }
 
@@ -64,19 +66,21 @@ void Application::keyboard(unsigned char key)
 	if (key == 'r')
 		camera.reset();
 
-	// L: rotar parte superior de la lampara
-    else if (key == 'l' || key == 'L')
+    else if (key == 'c' || key == 'c')
     {
         scene.rotateLamp();
     }
 
-    // V: activar / desactivar wireframe del estante
     else if (key == 'v' || key == 'V')
     {
         scene.toggleShelfWireframe();
     }
 
-    // Movimiento de camara existente
+    else if (key == 'b' || key == 'B')
+    {
+        scene.toggleAppleWireframe();
+    }
+
     else
     {
         camera.move(key);
@@ -91,6 +95,53 @@ void Application::timer()
 	
 	glutPostRedisplay();
 	glutTimerFunc(16, timerCallback, 0);
+}
+
+void Application::drawText(int x, int y, const char *text)
+{
+	glRasterPos2i(x, y);
+
+	while (*text)
+		glutBitmapCharacter(GLUT_BITMAP_8_BY_13, *text++);
+}
+
+void Application::drawHelp()
+{
+
+	int width = glutGet(GLUT_WINDOW_WIDTH);
+  int height = glutGet(GLUT_WINDOW_HEIGHT);
+
+	glDisable(GL_DEPTH_TEST);
+
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	gluOrtho2D(0, width, 0, height);
+
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	glLoadIdentity();
+
+	glColor3f(0, 0, 0);
+
+	drawText(10, height - 20, "W/S - Forward / Backward");
+	drawText(10, height - 40, "A/D - Left / Right");
+	drawText(10, height - 60, "Q/E - Down / Up");
+	drawText(10, height - 80, "I/K/J/L - Look");
+	drawText(10, height - 100, "C - Rotate Lamp");
+	drawText(10, height - 120, "V - Shelf Wireframe");
+	drawText(10, height - 140, "B - Apple Wireframe");
+	drawText(10, height - 160, "R - Reset Camera");
+	drawText(10, height - 180, "ESC - Exit");
+
+	glPopMatrix();
+
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+
+	glMatrixMode(GL_MODELVIEW);
+
+	glEnable(GL_DEPTH_TEST);
 }
 
 void Application::displayCallback()
