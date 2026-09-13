@@ -1,7 +1,6 @@
 #ifndef SCENE_HPP
 #define SCENE_HPP
 
-#include "Cone.hpp"
 #include "Chair.hpp"
 #include "Blinds.hpp"
 #include "Bed.hpp"
@@ -10,25 +9,22 @@
 #include "Lamp.hpp"
 #include "Shelf.hpp"
 #include "Clock.hpp"
+#include "Apple.hpp"
+#include "Room.hpp"
 
 class Scene
 {
 	private:
-		Cone cone;
+		Room room;
 		Chair chair;
 		Blinds blinds;
 		Desk desk;
 		Bed bed;
+		Apple apple;
 		Dresser dresser;
 		Lamp lamp;
 		Shelf shelf;
 		Clock clock;
-		// Variables de animación
-		float minuteAngle;
-		float lampAngle;
-
-		// Funciones auxiliares
-		void drawCube(float x, float y, float z) const;
 
 	public:
 		Scene();
@@ -36,13 +32,7 @@ class Scene
 		void update();
 		void rotateLamp();
 		void toggleShelfWireframe();
-
-		// Objetos JesusP
-		void drawComoda() const;
-		void drawLampara() const;
-		void drawEstante() const;
-		void drawReloj() const;
-		
+		void toggleAppleWireframe();
 };
 
 #endif
