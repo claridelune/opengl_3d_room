@@ -3,14 +3,16 @@
 
 #include "Camera.hpp"
 #include "Scene.hpp"
+#include "Renderer.hpp"
 
 class Application
 {
 	private:
 		static Application *instance;
 
-		Camera camera;
-		Scene scene;
+		Camera 	 camera;
+		Scene 	 scene;
+		Renderer renderer;
 
 		void display();
 		void reshape(int width, int height);
