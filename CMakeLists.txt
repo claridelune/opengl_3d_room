@@ -27,9 +27,13 @@ add_executable(main
 	src/objects/Clock.cpp
 	src/objects/Apple.cpp
 	src/objects/Room.cpp
+	src/objects/Cat.cpp
+	src/objects/Plant.cpp
+	src/objects/GlassLamp.cpp
 )
 
 target_include_directories(main PRIVATE include include/objects libs)
 target_link_libraries(main PRIVATE OpenGL::GL OpenGL::GLU GLUT::GLUT)
 
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
+
