@@ -8,6 +8,7 @@ Scene::Scene() : room(20.0f, 10.0f, 15.0f)
 	blinds.load();
 	bed.load();
 	desk.load();
+	cat.load();
 
 	// set transformations
 	chair.transform.position = Vector3(4.5, room.floorY(), room.backZ() + 3.5);
@@ -53,6 +54,61 @@ Scene::Scene() : room(20.0f, 10.0f, 15.0f)
 	clock.transform.rotation = Vector3( 0.0f, 90.0f, 0.0f);
 	clock.transform.scale = Vector3( 1.5f, 1.5f, 1.5f);
 
+	cat.transform.position = Vector3(
+    	-4.5f,
+    	room.floorY() + 1.65f,
+    	room.backZ() + 3.5f
+	);
+
+	cat.transform.scale = Vector3(
+    	0.0025f,
+    	0.0025f,
+    	0.0025f
+	);
+
+	cat.setBaseY(room.floorY() + 1.370f);
+
+	cat.setMovementLimits(
+    	-5.5f,
+    	-3.2f
+	);
+
+	plant.transform.position = Vector3(
+    	8.8f,
+    	room.floorY(),
+    	room.backZ() + 0.8f
+	);
+
+	plant.transform.rotation = Vector3(
+    	0.0f,
+    	0.0f,
+    	0.0f
+	);
+
+	plant.transform.scale = Vector3(
+    	0.6f,
+    	0.6f,
+    	0.6f
+	);
+
+	glassLamp.transform.position = Vector3(
+    	6.5f,
+    	room.floorY() + 2.150f,
+    	room.backZ() + 1.3f
+	);
+
+	glassLamp.transform.rotation = Vector3(
+    	0.0f,
+    	0.0f,
+    	0.0f
+	);
+
+	glassLamp.transform.scale = Vector3(
+    	0.75f,
+    	0.75f,
+    	0.75f
+	);
+
 	mainLight.transform.position = Vector3(0,7,-5);
 	mainLight.diffuse = Vector3(1,1,1);
 	mainLight.specular = Vector3(1,1,1);
@@ -67,6 +123,9 @@ Scene::Scene() : room(20.0f, 10.0f, 15.0f)
 	objects.push_back(&lamp);
 	objects.push_back(&shelf);
 	objects.push_back(&clock);
+	objects.push_back(&cat);
+	objects.push_back(&plant);
+	objects.push_back(&glassLamp);
 
 	lights.push_back(&mainLight);
 }
@@ -88,12 +147,14 @@ bool Scene::initialize()
 	if (!bedTexture.load("assets/textures/bed.jpg")) return false;
 	if (!deskTexture.load("assets/textures/desk.jpg")) return false;
 	if (!windowTexture.load("assets/textures/window.jpg")) return false;
+	if (!dresserTexture.load("assets/textures/dresser.jpg")) return false;
 
 	apple.material.texture = &appleTexture;
 	chair.material.texture = &chairTexture;
 	bed.material.texture = &bedTexture;
 	desk.material.texture = &deskTexture;
 	blinds.material.texture = &windowTexture;
+	dresser.material.texture = &dresserTexture;
 
 	return true;
 }
@@ -101,6 +162,7 @@ bool Scene::initialize()
 void Scene::update()
 {
 	clock.update();
+	cat.update();
 }
 
 void Scene::rotateLamp()
