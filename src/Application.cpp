@@ -15,6 +15,8 @@ bool Application::initialize(int argc, char **argv)
 
 	renderer.initialize();
 
+	if (!scene.initialize()) return false;
+
 	glutDisplayFunc(displayCallback);
 	glutReshapeFunc(reshapeCallback);
 	glutKeyboardFunc(keyboardCallback);

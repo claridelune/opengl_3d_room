@@ -3,6 +3,7 @@
 
 #include "Renderable.hpp"
 #include "Light.hpp"
+#include "Texture.hpp"
 #include "Chair.hpp"
 #include "Blinds.hpp"
 #include "Bed.hpp"
@@ -30,6 +31,8 @@ class Scene
 		Shelf shelf;
 		Clock clock;
 
+		Texture appleTexture;
+
 		Light mainLight;
 
 		std::vector<Renderable *> objects;
@@ -37,6 +40,7 @@ class Scene
 
 	public:
 		Scene();
+		bool initialize();
 		void update();
 
 		const std::vector<Renderable *> &getObjects() const;

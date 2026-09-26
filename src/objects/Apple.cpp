@@ -44,11 +44,15 @@ void Apple::draw() const
 		float v1 = -PI + 2.0f * PI * i / vSegments;
 		float v2 = -PI + 2.0f * PI * (i + 1) / vSegments;
 
+		float t1 = (float)i / vSegments;
+		float t2 = (float)(i + 1) / vSegments;
+
 		glBegin(GL_QUAD_STRIP);
 
 		for (int j = 0; j <= uSegments; j++)
 		{
 			float u = 2.0f * PI * j / uSegments;
+			float s = (float)j / uSegments;
 
 			Vector3 p1 = point(u, v1);
 			Vector3 p2 = point(u, v2);
@@ -57,9 +61,11 @@ void Apple::draw() const
 			Vector3 n2 = normal(u, v2);
 
 			glNormal3f(n1.x, n1.y, n1.z);
+			glTexCoord2f(s, t1);
 			glVertex3f(p1.x, p1.y, p1.z);
 
 			glNormal3f(n2.x, n2.y, n2.z);
+			glTexCoord2f(s, t2);
 			glVertex3f(p2.x, p2.y, p2.z);
 		}
 

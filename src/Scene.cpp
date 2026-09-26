@@ -29,7 +29,8 @@ Scene::Scene() : room(20.0f, 10.0f, 15.0f)
 	apple.transform.rotation = Vector3(0, 90, 0);
 	apple.transform.scale = Vector3(0.02f, 0.02f, 0.02f);
 	apple.material.ambient = Vector3(0.2f, 0.02f, 0.02f);
-	apple.material.diffuse = Vector3(0.8f, 0.1f, 0.1f);
+	// apple.material.diffuse = Vector3(0.8f, 0.1f, 0.1f);
+	apple.material.diffuse = Vector3(1.0f, 1.0f, 1.0f);
 	apple.material.specular = Vector3(1.0f, 1.0f, 1.0f);
 	apple.material.shininess = 80.0f;
 
@@ -75,6 +76,15 @@ const std::vector<Renderable *> &Scene::getObjects() const
 const std::vector<Light *> &Scene::getLights() const
 {
 	return lights;
+}
+
+bool Scene::initialize()
+{
+	if (!appleTexture.load("assets/textures/apple.jpg")) return false;
+
+	apple.material.texture = &appleTexture;
+
+	return true;
 }
 
 void Scene::update()

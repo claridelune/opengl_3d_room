@@ -16,6 +16,7 @@ add_executable(main
 	src/OBJModel.cpp
 	src/Transform.cpp
 	src/Renderer.cpp
+	src/Texture.cpp
 	src/objects/Chair.cpp
 	src/objects/Blinds.cpp
 	src/objects/Bed.cpp
@@ -28,7 +29,7 @@ add_executable(main
 	src/objects/Room.cpp
 )
 
-target_include_directories(main PRIVATE include include/objects)
+target_include_directories(main PRIVATE include include/objects libs)
 target_link_libraries(main PRIVATE OpenGL::GL OpenGL::GLU GLUT::GLUT)
 
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})

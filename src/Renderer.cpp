@@ -1,4 +1,5 @@
 #include "Renderer.hpp"
+#include "Texture.hpp"
 
 #include <GL/glut.h>
 #include <vector>
@@ -56,7 +57,7 @@ void Renderer::drawObject(const Renderable &object) const
 	glPopMatrix();
 }
 
-void Renderer::applyMaterial( const Material &material) const
+void Renderer::applyMaterial(const Material &material) const
 {
 	GLfloat ambient[] = { material.ambient.x, material.ambient.y,
 		material.ambient.z, material.opacity };
@@ -75,6 +76,17 @@ void Renderer::applyMaterial( const Material &material) const
 	glMaterialfv( GL_FRONT_AND_BACK, GL_SPECULAR, specular);
 	glMaterialfv( GL_FRONT_AND_BACK, GL_EMISSION, emission);
 	glMaterialf( GL_FRONT_AND_BACK, GL_SHININESS, material.shininess);
+
+	if (material.texture && material.texture->isLoaded())
+	{
+		glEnable(GL_TEXTURE_2D);
+		material.texture->bind();
+
+		glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+	} else {
+		glDisable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
 }
 
 void Renderer::applyLights( const std::vector<Light *> &lights) const
