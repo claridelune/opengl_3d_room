@@ -14,6 +14,9 @@
 #include "Clock.hpp"
 #include "Apple.hpp"
 #include "Room.hpp"
+#include "Cat.hpp"
+#include "Plant.hpp"
+#include "GlassLamp.hpp"
 
 #include <vector>
 
@@ -30,12 +33,16 @@ class Scene
 		Lamp lamp;
 		Shelf shelf;
 		Clock clock;
+		Cat cat;
+		Plant plant;
+		GlassLamp glassLamp;
 
 		Texture appleTexture;
 		Texture chairTexture;
 		Texture bedTexture;
 		Texture windowTexture;
 		Texture deskTexture;
+		Texture dresserTexture;
 
 		Light mainLight;
 
