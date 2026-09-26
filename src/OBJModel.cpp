@@ -12,6 +12,7 @@ bool OBJModel::load(const std::string &filename)
 
 	vertices.clear();
 	normals.clear();
+	texCoords.clear();
 	faces.clear();
 
 	std::string line;
@@ -31,6 +32,11 @@ bool OBJModel::load(const std::string &filename)
 			ss >> n.x >> n.y >> n.z;
 
 			normals.push_back(n);
+		} else if (type == "vt") {
+			Vector2 t;
+			ss >> t.x >> t.y;
+
+			texCoords.push_back(t);
 		} else if (type == "f") {
 			std::vector<FaceVertex> faceVertices;
 			std::string vertexText;
@@ -55,7 +61,7 @@ OBJModel::FaceVertex OBJModel::parseFaceVertex(const std::string &text)
 {
 	FaceVertex result;
 
-	int vertex, texture, normal;
+	int vertex, texture, normal = -1;
 	char slash;
 	std::stringstream ss(text);
 
@@ -70,6 +76,7 @@ OBJModel::FaceVertex OBJModel::parseFaceVertex(const std::string &text)
 
 	result.vertex = vertex - 1;
 	result.normal = normal -1;
+	result.texture = texture -1;
 	return result;
 }
 
@@ -85,10 +92,12 @@ void OBJModel::draw() const
 
 		for (int j = 0; j < 3; j++)
 		{
+			Vector2 t = texCoords[verticesFace[j].texture];
 			Vector3 n = normals[verticesFace[j].normal];
 			Vector3 v = vertices[verticesFace[j].vertex];
 
 			glNormal3f( n.x, n.y, n.z);
+			glTexCoord2f(t.x, t.y);
 			glVertex3f( v.x, v.y, v.z);
 		}
 	}

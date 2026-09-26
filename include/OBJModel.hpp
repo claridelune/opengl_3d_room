@@ -9,11 +9,12 @@
 class OBJModel
 {
 	private:
-		struct FaceVertex { int vertex, normal; };
+		struct FaceVertex { int vertex, normal, texture; };
 		struct Face { FaceVertex a, b, c; };
 
 		std::vector<Vector3> vertices;
 		std::vector<Vector3> normals;
+		std::vector<Vector2> texCoords;
 		std::vector<Face> faces;
 
 		FaceVertex parseFaceVertex(const std::string &text);

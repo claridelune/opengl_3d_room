@@ -10,26 +10,29 @@ Scene::Scene() : room(20.0f, 10.0f, 15.0f)
 	desk.load();
 
 	// set transformations
-	chair.transform.position = Vector3(4.5, room.floorY() + 1.5f, room.backZ() + 3);
-	chair.transform.rotation = Vector3(0, -180, 0);
-	chair.transform.scale = Vector3(3, 3, 3);
+	chair.transform.position = Vector3(4.5, room.floorY(), room.backZ() + 3.5);
+	chair.transform.rotation = Vector3(-90,0, 180);
+	chair.transform.scale = Vector3(0.035f, 0.035f, 0.035f);
+	chair.material.diffuse = Vector3(1.0f, 1.0f, 1.0f);
 
-	blinds.transform.position = Vector3(5, 3, room.backZ() + 0.5f);
-	blinds.transform.rotation = Vector3(0, 90, 0);
-	blinds.transform.scale = Vector3(0.05, 0.05, 0.05);
+	blinds.transform.position = Vector3(5, 5, room.backZ() + 0.05f);
+	blinds.transform.rotation = Vector3(90, 0, 180);
+	blinds.transform.scale = Vector3(0.08f, 0.08f, 0.08f);
+	blinds.material.diffuse = Vector3(1.0f, 1.0f, 1.0f);
 
 	bed.transform.position = Vector3(-4.5, room.floorY() + 1.2, room.backZ() + 3.5f);
 	bed.transform.rotation = Vector3(1, 1, 1);
 	bed.transform.scale = Vector3(2, 2, 2);
+	bed.material.diffuse = Vector3(1.0f, 1.0f, 1.0f);
 
-	desk.transform.position = Vector3(5, room.floorY() - 0.5f, room.backZ() + 0.5f);
+	desk.transform.position = Vector3(5, room.floorY() - 0.5f, room.backZ() + 1.2f);
 	desk.transform.scale = Vector3(0.5, 0.5, 0.5);
+	desk.material.diffuse = Vector3(1.0f, 1.0f, 1.0f);
 
 	apple.transform.position = Vector3(2.7f, 2.35, room.backZ() + 1);
 	apple.transform.rotation = Vector3(0, 90, 0);
 	apple.transform.scale = Vector3(0.02f, 0.02f, 0.02f);
 	apple.material.ambient = Vector3(0.2f, 0.02f, 0.02f);
-	// apple.material.diffuse = Vector3(0.8f, 0.1f, 0.1f);
 	apple.material.diffuse = Vector3(1.0f, 1.0f, 1.0f);
 	apple.material.specular = Vector3(1.0f, 1.0f, 1.0f);
 	apple.material.shininess = 80.0f;
@@ -81,8 +84,16 @@ const std::vector<Light *> &Scene::getLights() const
 bool Scene::initialize()
 {
 	if (!appleTexture.load("assets/textures/apple.jpg")) return false;
+	if (!chairTexture.load("assets/textures/chair.jpg")) return false;
+	if (!bedTexture.load("assets/textures/bed.jpg")) return false;
+	if (!deskTexture.load("assets/textures/desk.jpg")) return false;
+	if (!windowTexture.load("assets/textures/window.jpg")) return false;
 
 	apple.material.texture = &appleTexture;
+	chair.material.texture = &chairTexture;
+	bed.material.texture = &bedTexture;
+	desk.material.texture = &deskTexture;
+	blinds.material.texture = &windowTexture;
 
 	return true;
 }

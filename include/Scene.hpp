@@ -32,6 +32,10 @@ class Scene
 		Clock clock;
 
 		Texture appleTexture;
+		Texture chairTexture;
+		Texture bedTexture;
+		Texture windowTexture;
+		Texture deskTexture;
 
 		Light mainLight;
 
