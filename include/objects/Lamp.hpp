@@ -2,30 +2,33 @@
 #define LAMP_HPP
 
 #include "Renderable.hpp"
+#include "Light.hpp"
 
 class Lamp : public Renderable
 {
 private:
     float upperAngle;
+    Light light;
 
-    void drawBox(
-        float width,
-        float height,
-        float depth
-    ) const;
+		void drawBox( float width, float height, float depth) const;
 
-    void drawShade() const;
     void drawBezierCable() const;
+    void drawShade() const;
+
+		void applyPartMaterial( float r, float g, float b, float shininess, float emission = 0.0f) const;
+
+    Vector3 bulbLocalPosition() const;
+    void syncLight();
 
 public:
-    using Renderable::transform;
-
     Lamp();
 
     void draw() const;
 
-    // Movimiento manual con teclado
+    void update();
     void rotateUpperPart();
+
+    Light &getLight();
 };
 
 #endif

@@ -49,6 +49,8 @@ class Transform
 
 		Transform();
 		void apply() const;
+
+		Vector3 transformPoint( const Vector3 &point) const;
 };
 
 #endif
