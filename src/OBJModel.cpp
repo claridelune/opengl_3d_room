@@ -2,6 +2,7 @@
 #include <GL/glut.h>
 #include <fstream>
 #include <sstream>
+#include <iostream>
 
 bool OBJModel::load(const std::string &filename)
 {
@@ -10,6 +11,8 @@ bool OBJModel::load(const std::string &filename)
 		return false;
 
 	vertices.clear();
+	normals.clear();
+	texCoords.clear();
 	faces.clear();
 
 	std::string line;
@@ -20,54 +23,84 @@ bool OBJModel::load(const std::string &filename)
 		std::string type;
 		ss >> type;
 
-		if (type == "v")
-		{
-			Vertex v;
+		if (type == "v") {
+			Vector3 v;
 			ss >> v.x >> v.y >> v.z;
 			vertices.push_back(v);
-		}
-		else if (type == "f")
-		{
-			std::vector<int> v;
-			int i;
+		} else if (type == "vn") {
+			Vector3 n;
+			ss >> n.x >> n.y >> n.z;
 
-			while (ss >> i)
-				v.push_back(i - 1);
+			normals.push_back(n);
+		} else if (type == "vt") {
+			Vector2 t;
+			ss >> t.x >> t.y;
 
-			for (int n = 1; n < v.size() - 1; n++)
-			{
-				Face f;
-				f.a = v[0];
-				f.b = v[n];
-				f.c = v[n + 1];
-				faces.push_back(f);
+			texCoords.push_back(t);
+		} else if (type == "f") {
+			std::vector<FaceVertex> faceVertices;
+			std::string vertexText;
+
+			while (ss >> vertexText)
+				faceVertices.push_back(parseFaceVertex(vertexText));
+
+			for (int i = 1; i+1<faceVertices.size(); ++i) {
+				Face face;
+				face.a = faceVertices[0];
+        face.b = faceVertices[i];
+        face.c = faceVertices[i + 1];
+
+				faces.push_back(face);
 			}
 		}
 	}
 	return true;
 }
 
+OBJModel::FaceVertex OBJModel::parseFaceVertex(const std::string &text)
+{
+	FaceVertex result;
+
+	int vertex, texture, normal = -1;
+	char slash;
+	std::stringstream ss(text);
+
+	ss >> vertex;
+	ss >> slash;
+
+	if (ss.peek() != '/')
+		ss >> texture;
+
+	ss >> slash;
+	ss >> normal;
+
+	result.vertex = vertex - 1;
+	result.normal = normal -1;
+	result.texture = texture -1;
+	return result;
+}
+
 void OBJModel::draw() const
 {
-	glPushMatrix();
-
-	transform.apply();
-
 	glBegin(GL_TRIANGLES);
 
-	for (std::size_t i = 0; i < faces.size(); ++i)
+	for (unsigned int i = 0; i < faces.size(); i++)
 	{
 		const Face &f = faces[i];
-		const Vertex &a = vertices[f.a];
-		const Vertex &b = vertices[f.b];
-		const Vertex &c = vertices[f.c];
 
-		glVertex3f(a.x, a.y, a.z);
-		glVertex3f(b.x, b.y, b.z);
-		glVertex3f(c.x, c.y, c.z);
+		const FaceVertex verticesFace[3] = { f.a, f.b, f.c };
+
+		for (int j = 0; j < 3; j++)
+		{
+			Vector2 t = texCoords[verticesFace[j].texture];
+			Vector3 n = normals[verticesFace[j].normal];
+			Vector3 v = vertices[verticesFace[j].vertex];
+
+			glNormal3f( n.x, n.y, n.z);
+			glTexCoord2f(t.x, t.y);
+			glVertex3f( v.x, v.y, v.z);
+		}
 	}
 
 	glEnd();
-
-	glPopMatrix();
 }

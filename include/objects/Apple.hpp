@@ -1,17 +1,11 @@
 #ifndef APPLE_HPP
 #define APPLE_HPP
 
-#include "Transform.hpp"
+#include "Renderable.hpp"
 
-class Apple
+class Apple : public Renderable
 {
-	private:
-		bool wireframe;
 	public:
-		Transform transform;
-		
-		Apple();
-
 		void toggleWireframe();
 		void draw() const;
 };

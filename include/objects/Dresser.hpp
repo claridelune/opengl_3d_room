@@ -1,12 +1,12 @@
 #ifndef DRESSER_HPP
 #define DRESSER_HPP
 
-#include "Transform.hpp"
+#include "Renderable.hpp"
 
-class Dresser
+class Dresser : public Renderable
 {
 public:
-    Transform transform;
+    using Renderable::transform;
 
     Dresser();
 

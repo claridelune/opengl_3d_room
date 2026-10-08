@@ -1,12 +1,16 @@
 #ifndef ROOM_HPP
 #define ROOM_HPP
 
-class Room
+#include "Renderable.hpp"
+
+class Room : public Renderable
 {
 	private:
 		float width, height, depth;
 	public:
 		Room(float width, float height, float depth);
+
+		using Renderable::transform;
 
 		void draw() const;
 

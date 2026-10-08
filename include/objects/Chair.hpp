@@ -2,14 +2,14 @@
 #define CHAIR_HPP
 
 #include "OBJModel.hpp"
-#include "Transform.hpp"
+#include "Renderable.hpp"
 
-class Chair
+class Chair : public Renderable
 {
 	private:
 		OBJModel model;
 	public:
-		Transform transform;
+		using Renderable::transform;
 
 		bool load();
 		void draw() const;

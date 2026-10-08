@@ -8,11 +8,7 @@ bool Chair::load()
 
 void Chair::draw() const
 {
-	glPushMatrix();
   glColor3f(0.0f, 0.0f, 0.0f);
-	transform.apply();
 
 	model.draw();
-
-	glPopMatrix();
 }

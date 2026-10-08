@@ -3,6 +3,7 @@ project(main)
 
 set(CMAKE_CXX_STANDARD 98)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(OpenGL_GL_PREFERENCE LEGACY)
 
 find_package(OpenGL REQUIRED)
 find_package(GLUT REQUIRED)
@@ -14,19 +15,25 @@ add_executable(main
 	src/Scene.cpp
 	src/OBJModel.cpp
 	src/Transform.cpp
-	src/Chair.cpp
-	src/Blinds.cpp
-	src/Bed.cpp
-	src/Desk.cpp
-	src/Dresser.cpp
-	src/Lamp.cpp
-	src/Shelf.cpp
-	src/Clock.cpp
-	src/Apple.cpp
-	src/Room.cpp
+	src/Renderer.cpp
+	src/Texture.cpp
+	src/objects/Chair.cpp
+	src/objects/Blinds.cpp
+	src/objects/Bed.cpp
+	src/objects/Desk.cpp
+	src/objects/Dresser.cpp
+	src/objects/Lamp.cpp
+	src/objects/Shelf.cpp
+	src/objects/Clock.cpp
+	src/objects/Apple.cpp
+	src/objects/Room.cpp
+	src/objects/Cat.cpp
+	src/objects/Plant.cpp
+	src/objects/GlassLamp.cpp
 )
 
-target_include_directories(main PRIVATE include)
+target_include_directories(main PRIVATE include include/objects libs)
 target_link_libraries(main PRIVATE OpenGL::GL OpenGL::GLU GLUT::GLUT)
 
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
+

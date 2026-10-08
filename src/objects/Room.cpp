@@ -19,6 +19,7 @@ void Room::draw() const
 
     // Floor
     glColor3f(0.6f, 0.6f, 0.6f);
+		glNormal3f(0,1,0);
 
     glBegin(GL_QUADS);
     glVertex3f(left, 0, 0);
@@ -29,6 +30,7 @@ void Room::draw() const
 
     // Back wall
     glColor3f(0.8f, 0.8f, 0.8f);
+		glNormal3f(0,0,1);
 
     glBegin(GL_QUADS);
     glVertex3f(left, 0, back);
@@ -39,6 +41,7 @@ void Room::draw() const
 
     // Left wall
     glColor3f(0.75f, 0.75f, 0.75f);
+		glNormal3f(1,0,0);
 
     glBegin(GL_QUADS);
     glVertex3f(left, 0, 0);
@@ -49,6 +52,7 @@ void Room::draw() const
 
     // Right wall
     glColor3f(0.75f, 0.75f, 0.75f);
+		glNormal3f(-1,0,0);
 
     glBegin(GL_QUADS);
     glVertex3f(right, 0, back);

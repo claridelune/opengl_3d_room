@@ -61,12 +61,6 @@ void Clock::update()
 
 void Clock::draw() const
 {
-    glPushMatrix();
-
-    // Transform general del reloj
-    transform.apply();
-
-
     // ========================================================
     // CARA DEL RELOJ
     // ========================================================
@@ -255,9 +249,6 @@ void Clock::draw() const
             16,
             16
         );
-
-    glPopMatrix();
-
 
     glPopMatrix();
 }

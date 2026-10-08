@@ -1,9 +1,9 @@
 #ifndef CLOCK_HPP
 #define CLOCK_HPP
 
-#include "Transform.hpp"
+#include "Renderable.hpp"
 
-class Clock
+class Clock : public Renderable
 {
 private:
     float minuteAngle;
@@ -15,7 +15,7 @@ private:
     ) const;
 
 public:
-    Transform transform;
+    using Renderable::transform;
 
     Clock();
 

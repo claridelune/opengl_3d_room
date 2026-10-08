@@ -1,9 +1,9 @@
 #ifndef SHELF_HPP
 #define SHELF_HPP
 
-#include "Transform.hpp"
+#include "Renderable.hpp"
 
-class Shelf
+class Shelf : public Renderable
 {
 private:
     bool wireframe;
@@ -15,7 +15,7 @@ private:
     ) const;
 
 public:
-    Transform transform;
+    using Renderable::transform;
 
     Shelf();
 

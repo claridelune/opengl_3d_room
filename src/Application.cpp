@@ -13,8 +13,9 @@ bool Application::initialize(int argc, char **argv)
 	glutInitWindowSize(900, 600);
 	glutCreateWindow("3D Room");
 
-	glEnable(GL_DEPTH_TEST);
-	glClearColor(1.00f, 1.00f, 1.0f, 1.0f);
+	renderer.initialize();
+
+	if (!scene.initialize()) return false;
 
 	glutDisplayFunc(displayCallback);
 	glutReshapeFunc(reshapeCallback);
@@ -31,13 +32,7 @@ void Application::run()
 
 void Application::display()
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-
-	camera.apply();
-	scene.draw();
+	renderer.render(scene, camera);
 
 	drawHelp();
 
@@ -66,25 +61,17 @@ void Application::keyboard(unsigned char key)
 	if (key == 'r')
 		camera.reset();
 
-    else if (key == 'c' || key == 'C')
-    {
-        scene.rotateLamp();
-    }
+	else if (key == 'c' || key == 'C')
+		scene.rotateLamp();
 
-    else if (key == 'v' || key == 'V')
-    {
-        scene.toggleShelfWireframe();
-    }
+	else if (key == 'v' || key == 'V')
+		scene.toggleShelfWireframe();
 
-    else if (key == 'b' || key == 'B')
-    {
-        scene.toggleAppleWireframe();
-    }
+	else if (key == 'b' || key == 'B')
+		scene.toggleAppleWireframe();
 
-    else
-    {
-        camera.move(key);
-    }
+	else
+		camera.move(key);
 
 	glutPostRedisplay();
 }

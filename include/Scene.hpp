@@ -1,6 +1,9 @@
 #ifndef SCENE_HPP
 #define SCENE_HPP
 
+#include "Renderable.hpp"
+#include "Light.hpp"
+#include "Texture.hpp"
 #include "Chair.hpp"
 #include "Blinds.hpp"
 #include "Bed.hpp"
@@ -11,6 +14,11 @@
 #include "Clock.hpp"
 #include "Apple.hpp"
 #include "Room.hpp"
+#include "Cat.hpp"
+#include "Plant.hpp"
+#include "GlassLamp.hpp"
+
+#include <vector>
 
 class Scene
 {
@@ -25,11 +33,30 @@ class Scene
 		Lamp lamp;
 		Shelf shelf;
 		Clock clock;
+		Cat cat;
+		Plant plant;
+		GlassLamp glassLamp;
+
+		Texture appleTexture;
+		Texture chairTexture;
+		Texture bedTexture;
+		Texture windowTexture;
+		Texture deskTexture;
+		Texture dresserTexture;
+
+		Light mainLight;
+
+		std::vector<Renderable *> objects;
+		std::vector<Light *> lights;
 
 	public:
 		Scene();
-		void draw() const;
+		bool initialize();
 		void update();
+
+		const std::vector<Renderable *> &getObjects() const;
+		const std::vector<Light *> &getLights() const;
+
 		void rotateLamp();
 		void toggleShelfWireframe();
 		void toggleAppleWireframe();

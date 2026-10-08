@@ -55,12 +55,6 @@ void Shelf::toggleWireframe()
 
 void Shelf::draw() const
 {
-    glPushMatrix();
-
-    // Transform general del objeto
-    transform.apply();
-
-
     // ========================================================
     // COLOR GENERAL
     // ========================================================
@@ -231,7 +225,4 @@ void Shelf::draw() const
 
         glPopMatrix();
     }
-
-
-    glPopMatrix();
 }

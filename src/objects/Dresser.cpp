@@ -15,17 +15,120 @@ void Dresser::drawBox(
     float depth
 ) const
 {
-    glPushMatrix();
+    float x = width  / 2.0f;
+    float y = height / 2.0f;
+    float z = depth  / 2.0f;
 
-        glScalef(
-            width,
-            height,
-            depth
-        );
+    glBegin(GL_QUADS);
 
-        glutSolidCube(1.0f);
+    // ========================================================
+    // FRENTE
+    // ========================================================
+    glNormal3f(0.0f, 0.0f, 1.0f);
 
-    glPopMatrix();
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-x, -y, z);
+
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(x, -y, z);
+
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(x, y, z);
+
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-x, y, z);
+
+
+    // ========================================================
+    // ATRÁS
+    // ========================================================
+    glNormal3f(0.0f, 0.0f, -1.0f);
+
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(-x, -y, -z);
+
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(x, -y, -z);
+
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(x, y, -z);
+
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(-x, y, -z);
+
+
+    // ========================================================
+    // LATERAL IZQUIERDO
+    // ========================================================
+    glNormal3f(-1.0f, 0.0f, 0.0f);
+
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-x, -y, -z);
+
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(-x, -y, z);
+
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(-x, y, z);
+
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-x, y, -z);
+
+
+    // ========================================================
+    // LATERAL DERECHO
+    // ========================================================
+    glNormal3f(1.0f, 0.0f, 0.0f);
+
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(x, -y, z);
+
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(x, -y, -z);
+
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(x, y, -z);
+
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(x, y, z);
+
+
+    // ========================================================
+    // PARTE SUPERIOR
+    // ========================================================
+    glNormal3f(0.0f, 1.0f, 0.0f);
+
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-x, y, z);
+
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(x, y, z);
+
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(x, y, -z);
+
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-x, y, -z);
+
+
+    // ========================================================
+    // PARTE INFERIOR
+    // ========================================================
+    glNormal3f(0.0f, -1.0f, 0.0f);
+
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-x, -y, -z);
+
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(x, -y, -z);
+
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(x, -y, z);
+
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-x, -y, z);
+
+    glEnd();
 }
 
 // ============================================================
@@ -34,21 +137,11 @@ void Dresser::drawBox(
 
 void Dresser::draw() const
 {
-    glPushMatrix();
-
-    // Aplicando la clase Transform
-    transform.apply();
-
-
     // ========================================================
     // CUERPO PRINCIPAL
     // ========================================================
 
-    glColor3f(
-        0.50f,
-        0.28f,
-        0.12f
-    );
+    glColor3f(1.0f, 1.0f, 1.0f);
 
     glPushMatrix();
 
@@ -71,11 +164,7 @@ void Dresser::draw() const
     // TABLERO SUPERIOR
     // ========================================================
 
-    glColor3f(
-        0.65f,
-        0.38f,
-        0.16f
-    );
+    glColor3f(1.0f, 1.0f, 1.0f);
 
     glPushMatrix();
 
@@ -105,11 +194,7 @@ void Dresser::draw() const
             i * 0.34f;
 
 
-        glColor3f(
-            0.62f,
-            0.34f,
-            0.14f
-        );
+       glColor3f(1.0f, 1.0f, 1.0f);
 
         glPushMatrix();
 
@@ -129,6 +214,8 @@ void Dresser::draw() const
 
 
         // Tirador izquierdo
+
+        glEnable(GL_TEXTURE_2D);
 
         glColor3f(
             0.85f,
@@ -152,8 +239,12 @@ void Dresser::draw() const
 
         glPopMatrix();
 
+        glEnable(GL_TEXTURE_2D);
+
 
         // Tirador derecho
+
+        glEnable(GL_TEXTURE_2D);
 
         glPushMatrix();
 
@@ -170,6 +261,8 @@ void Dresser::draw() const
             );
 
         glPopMatrix();
+        
+        glEnable(GL_TEXTURE_2D);
     }
 
 
@@ -178,9 +271,7 @@ void Dresser::draw() const
     // ========================================================
 
     glColor3f(
-        0.35f,
-        0.18f,
-        0.08f
+        0.35f, 0.18f, 0.08f
     );
 
 
@@ -220,7 +311,4 @@ void Dresser::draw() const
 
         glPopMatrix();
     }
-
-
-    glPopMatrix();
 }
